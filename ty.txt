@@ -1,0 +1,21 @@
+import sqlite3
+
+conn = sqlite3.connect('bd.db')
+cursor = conn.cursor()
+
+def querty(data):
+    lst = []
+    minn = 0
+    cursor.execute("""SELECT * FROM stations;""")
+    res1 = cursor.fetchall()
+    for i in res1:
+        lst.append(i[-2])
+    minn = min(lst)
+
+    cursor.execute(
+        f"""SELECT * FROM STATIONS WHERE temperature={minn}"""
+    )
+    res = cursor.fetchall()
+    for jj in res:
+        print(jj)
+
